@@ -1,6 +1,5 @@
 import { z } from 'zod'
-import {hashSync} from 'bcryptjs';
-import { name } from 'ts-jest/dist/transformers/hoist-jest';
+import { hashSync } from 'bcryptjs';
 
 export const userSchemas = z.object({
   name: z.string().min(3).max(45),
@@ -8,7 +7,7 @@ export const userSchemas = z.object({
   password: z.string().min(4).max(20).transform((pass) => {
     return hashSync(pass, 10)
   }),
-  admin: z.boolean(),
+  admin: z.boolean().optional().default(false),
 })
 
 export const returnUserSchema = userSchemas.extend({
@@ -16,9 +15,8 @@ export const returnUserSchema = userSchemas.extend({
   createdAt: z.date(),
   updatedAt: z.date(),
   deletedAt: z.date().nullable()
-
-}).omit({password: true})
+}).omit({ password: true })
 
 export const allUsersSchema = returnUserSchema.array()
 
-export const userUpdateSchema = userSchemas.pick({name:true,email:true,password:true});
+export const userUpdateSchema = userSchemas.pick({ name: true, email: true, password: true })

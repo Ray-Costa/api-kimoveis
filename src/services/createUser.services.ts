@@ -1,13 +1,13 @@
-import {IUserRequest,IUser} from '../interfaces';
-import {AppDataSource} from '../data-source';
-import{User} from '../entities';
-import{Repository} from 'typeorm';
-import {returnUserSchema} from '../schemas';
+import { IUser, IUserRequest } from '../interfaces';
+import { AppDataSource } from '../data-source';
+import { User } from '../entities';
+import { Repository } from 'typeorm';
+import { returnUserSchema } from '../schemas';
 
 
-export const createUserService = async (userData: IUserRequest):Promise<IUser> => {
+export const createUserService = async (userData: IUserRequest): Promise<IUser> => {
 
-  const userRepository:Repository<User> = AppDataSource.getRepository(User)
+  const userRepository: Repository<User> = AppDataSource.getRepository(User)
 
   const user = userRepository.create(userData)
 
