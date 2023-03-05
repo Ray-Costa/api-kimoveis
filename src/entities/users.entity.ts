@@ -19,6 +19,9 @@ export class User {
   @Column({ length: 120 })
   password: string
 
+  @Column({ default: true })
+  active?: boolean
+
   @CreateDateColumn()
   createdAt: string
 

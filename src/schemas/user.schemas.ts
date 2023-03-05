@@ -8,6 +8,7 @@ export const userSchemas = z.object({
     return hashSync(pass, 10)
   }),
   admin: z.boolean().optional().default(false),
+  active: z.boolean().optional().default(true)
 })
 
 export const returnUserSchema = userSchemas.extend({
