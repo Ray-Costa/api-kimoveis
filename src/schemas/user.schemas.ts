@@ -15,7 +15,8 @@ export const returnUserSchema = userSchemas.extend({
   id: z.number(),
   createdAt: z.date(),
   updatedAt: z.date(),
-  deletedAt: z.date().nullable()
+  deletedAt: z.date().nullable(),
+  schedules: z.any().optional()
 }).omit({ password: true })
 
 export const allUsersSchema = returnUserSchema.array()

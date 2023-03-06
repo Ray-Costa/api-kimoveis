@@ -24,6 +24,10 @@ export const createLoginService = async (loginData: ILogin): Promise<string> => 
     throw new AppError('Wrong email or password', 401)
   }
 
+  if(user.active === false){
+    throw new AppError('User already deleted', 400)
+
+  }
   const token: string = jwt.sign(
     {
 

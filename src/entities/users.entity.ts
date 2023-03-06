@@ -1,4 +1,14 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn, DeleteDateColumn,
+  Entity,
+  JoinTable,
+  ManyToMany, OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
+import { RealEstateEntity } from './realEstate.entity';
+import { ScheduleUsersProperty} from './schedulesUsersProperties.entity';
 
 @Entity('users')
 
@@ -30,4 +40,7 @@ export class User {
 
   @DeleteDateColumn()
   deletedAt: string
+
+  @OneToMany(()=> ScheduleUsersProperty, schedule => schedule.user)
+  schedules: ScheduleUsersProperty[]
 }

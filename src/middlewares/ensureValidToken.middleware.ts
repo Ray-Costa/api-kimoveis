@@ -8,9 +8,7 @@ export const ensureValidTokenMiddlewares = async (request:Request,response:Respo
 
   if(!token){
     throw  new AppError('Missing Bearer Token', 401)
-
   }
-
   token = token.split(' ')[1]
   jwt.verify(token,process.env.SECRET_KEY || 'w1Z6S5x3Jqel4Y6dieRJ0lQAefGWQk39', (error, decoded:any) => {
     if(error){
