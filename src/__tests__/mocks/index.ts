@@ -1,11 +1,11 @@
 import createCategoryRouteMock from './category/createCategory.route.mock';
 import readCategoryRouteMock from './category/readCategory.route.mock';
-import readCategoryRealStateRouteMock from './category/readCategoryRealState.route.mock';
+import readCategoryRealEstateRouteMock from './category/readCategoryRealEstate.route.mock';
 import errorsMock from './errors.mock';
 import createRealEstateRouteMock from './realEstate/createRealEstate.route.mock';
 import readRealEstateRouteMock from './realEstate/readRealEstate.route.mock';
 import createScheduleRouteMock from './schedules/createSchedule.route.mock';
-import readScheduleRouteMock from './schedules/readScheduleRealStates.route.mock';
+import readScheduleRouteMock from './schedules/readScheduleRealEstates.route.mock';
 import createSessionRouteMock from './session/createSession.route.mock';
 import tokenMock from './session/token.mock';
 import createUserRouteMock from './users/createUser.route.mock';
@@ -17,7 +17,7 @@ export {
   createCategoryRouteMock,
   readCategoryRouteMock,
   createRealEstateRouteMock,
-  readCategoryRealStateRouteMock,
+  readCategoryRealEstateRouteMock,
   errorsMock,
   readRealEstateRouteMock,
   createScheduleRouteMock,

@@ -1,7 +1,9 @@
 import {
   Column,
   CreateDateColumn,
-  Entity, JoinColumn, ManyToOne,
+  Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -21,7 +23,7 @@ export class RealEstateEntity {
   @Column({ default: false })
   sold: boolean
 
-  @Column()
+  @Column('decimal', { precision: 12, scale: 2 })
   value: number
 
   @Column()
@@ -33,16 +35,13 @@ export class RealEstateEntity {
   @UpdateDateColumn()
   updatedAt: string
 
-  @OneToMany(()=> ScheduleUsersProperty, schedule => schedule.user)
+  @OneToMany(() => ScheduleUsersProperty, schedule => schedule.user)
   schedules: ScheduleUsersProperty[]
 
- @OneToOne(() => Address, {nullable:true})
+  @OneToOne(() => Address, { nullable: true })
   @JoinColumn()
-  adress: Address
+  address: Address | number
 
-  @ManyToOne(()=> Category, category => category.realEstates)
-  category: Category
-
-
-
+  @ManyToOne(() => Category, category => category.realEstates)
+  category: Category | number
 }

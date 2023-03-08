@@ -12,14 +12,14 @@ export class ScheduleUsersProperty {
   @Column({ type: 'date' })
   date: string
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'time' })
   hour: string
 
   @ManyToOne(() => User, user => user.schedules)
-  user: User
+  user: User | number
 
   @ManyToOne(()=> RealEstateEntity, realEstate => realEstate.schedules)
-  realEstate: RealEstateEntity
+  realEstate: RealEstateEntity | number
 }
 
 

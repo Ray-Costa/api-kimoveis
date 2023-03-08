@@ -3,33 +3,27 @@ import { Request, Response } from 'express';
 import { createUserService, deleteUserService, listUsersService } from '../services';
 import { updateUserService } from '../services/updateUser.service';
 
-
 export const createUserController = async (request: Request, response: Response): Promise<Response> => {
-
   const userData: IUserRequest = request.body
 
-  // @ts-ignore
   const newUser = await createUserService(userData)
 
   return response.status(201).json(newUser)
 }
 
 export const listUsersController = async (request: Request, response: Response): Promise<Response> => {
-
   const users = await listUsersService()
 
   return response.json(users)
 }
 
 export const deleteUserController = async (request: Request, response: Response) => {
-
-  await deleteUserService(request.user);
+  await deleteUserService(parseInt(request.params.id));
 
   return response.status(204).send()
 }
 
 export const updateUserController = async (request: Request, response: Response) => {
-
   const userData = request.body
 
   const updateUser = await updateUserService(request.user, userData)

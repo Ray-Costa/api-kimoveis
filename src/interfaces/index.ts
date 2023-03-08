@@ -1,6 +1,7 @@
 import {IUserRequest,IUser,IUsersReturn} from './users.interface';
 import {ILogin} from './login.interfaces';
 import {ICategories, ICategoriesReturn} from './categories.interfaces';
+import {IRealEstate} from './realEstate.interfaces';
 
 
 export{
@@ -9,6 +10,7 @@ export{
   IUsersReturn,
   ILogin,
   ICategories,
-  ICategoriesReturn
+  ICategoriesReturn,
+  IRealEstate
 
 }

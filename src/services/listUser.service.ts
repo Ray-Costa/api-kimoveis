@@ -2,14 +2,18 @@ import {allUsersSchema} from '../schemas';
 import { IUsersReturn } from '../interfaces';
 import { AppDataSource } from '../data-source';
 import { User } from '../entities';
+import { Repository } from 'typeorm';
 
 export const listUsersService= async ():Promise<IUsersReturn> => {
 
-  const usersRepository = AppDataSource.getRepository(User)
+  const usersRepository:Repository<User> = AppDataSource.getRepository(User)
 
-  const users = await usersRepository.find()
+  const users = await usersRepository.find({
+    withDeleted:true
 
-  const allUsers = allUsersSchema.parse(users)
+  })
 
-  return allUsers
+  return  allUsersSchema.parse(users)
+
+
 }

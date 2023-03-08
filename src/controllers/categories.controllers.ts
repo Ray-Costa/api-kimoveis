@@ -15,6 +15,4 @@ export const listCategoriesController = async (request:Request, response:Respons
   const categories = await listCategoriesService()
 
   return response.json(categories)
-
-
 }

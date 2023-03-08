@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 import app from '../../../app';
 import { AppDataSource } from '../../../data-source';
 import { RealEstate } from '../../../entities';
-import { errorsMock, readCategoryRealStateRouteMock } from '../../mocks';
+import { errorsMock, readCategoryRealEstateRouteMock } from '../../mocks';
 
 describe('GET /categories/:id/realEstate', () => {
   let connection: DataSource;
@@ -17,7 +17,7 @@ describe('GET /categories/:id/realEstate', () => {
       .then(async (res) => {
         connection = res;
         const category =
-          await readCategoryRealStateRouteMock.categoryRealStation();
+          await readCategoryRealEstateRouteMock.categoryRealStation();
 
         categoryRealEstate = category;
         baseUrl = baseUrl + `/${category.id}/realEstate`;

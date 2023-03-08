@@ -1,21 +1,21 @@
 import { AppDataSource } from '../data-source';
 import { User } from '../entities';
 import { AppError } from '../errors';
+import { Repository } from 'typeorm';
 
 
-export const deleteUserService = async (user: User): Promise<void> => {
+export const deleteUserService = async (idUser: number): Promise<void> => {
 
-  const usersRepository = AppDataSource.getRepository(User)
+  const usersRepository: Repository<User> = AppDataSource.getRepository(User)
 
-  if(user.active === false){
-    throw new AppError('User already deleted', 400)
+  const user = await usersRepository.findOne({
+    where: {
+      id: idUser
 
-  }
+    }
+  })
+  await usersRepository.softRemove(user!)
 
-  await usersRepository.save({
-    ...user,
-    active: false
-  } as User);
 
 }
 
