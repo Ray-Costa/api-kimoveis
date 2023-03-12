@@ -8,10 +8,11 @@ import { userUpdateSchema } from '../schemas/user.schemas';
 import { isAdmin } from '../middlewares/isAdmin.middleware';
 import { ensureValidTokenMiddlewares } from '../middlewares/ensureValidToken.middleware';
 import { ensureUserHasPermissionToUpdate } from '../middlewares/ensureUserHasPermissionToUpdate.middleware';
+import { isOwnerOrAdmin } from '../middlewares/isOwnerOrAdmin.middleware';
 
 export const usersRoutes: Router = Router()
 
 usersRoutes.post('', ensureDataIsValidMiddleware(userSchemas), ensureEmailUserExistsMiddleware, createUserController)
 usersRoutes.get('', ensureValidTokenMiddlewares, isAdmin, listUsersController)
 usersRoutes.patch('/:id', ensureDataIsValidMiddleware(userUpdateSchema), ensureValidTokenMiddlewares, ensureUserExistsMiddleware, ensureUserHasPermissionToUpdate, updateUserController)
-usersRoutes.delete('/:id', ensureValidTokenMiddlewares, isAdmin, ensureUserExistsMiddleware, deleteUserController)
+usersRoutes.delete('/:id', ensureValidTokenMiddlewares, ensureUserExistsMiddleware, isOwnerOrAdmin, deleteUserController)

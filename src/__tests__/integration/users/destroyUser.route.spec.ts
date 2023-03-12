@@ -64,8 +64,7 @@ describe('DELETE /users', () => {
     expect(response.body).toStrictEqual(errorsMock.forbidden.error);
   });
 
-  // A rubrica diz que essa rota apenas admin pode deletar, mas o teste pede para que o usuário não admin tente deletar
-  it.skip('Error: Must not be able to destroy - Invalid ID', async () => {
+  it('Error: Must not be able to destroy - Invalid ID', async () => {
     const response = await supertest(app)
       .delete(destroyInvalidIDUrl)
       .set(
