@@ -18,7 +18,7 @@ export const ensureUserExistsMiddleware = async (request: Request, response: Res
   })
 
   if (!findUser) {
-    throw new AppError('User not found.', 404)
+    throw new AppError('User not found', 404)
   }
 
   request.user = findUser;

@@ -28,7 +28,7 @@ const manyRealStations = async (
     const realEstateVal = Math.random() * 10000000;
     const addressCreate = await addressRepo.save(address);
     manyRealEstate.push({
-      value: parseFloat(realEstateVal.toString()).toFixed(2),
+      value: parseFloat(realEstateVal.toString()).toFixed(2).toString(),
       size: Math.ceil(Math.random() * 100),
       address: addressCreate,
     });

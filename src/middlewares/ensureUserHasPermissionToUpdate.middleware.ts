@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import { isTokenValid } from '../../utils/jwt.verify';
 import { AppError } from '../errors';
+import { isTokenValid } from '../../utils/jwt.verify';
 
-export const isAdmin = (request: Request, response: Response, next: NextFunction) => {
+
+export const ensureUserHasPermissionToUpdate = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
   try {
     const token = request.headers.authorization;
     if (!token) {
@@ -14,9 +15,16 @@ export const isAdmin = (request: Request, response: Response, next: NextFunction
     if (payload && payload.admin) {
       return next()
     } else {
-      throw new AppError('Insufficient permission', 403)
+      if (String(payload.sub) !== String(request.params.id)) {
+        throw new AppError('Insufficient permission', 403)
+      } else {
+        delete request.body.admin;
+      }
     }
   } catch (error: any) {
     throw new AppError(error.message, error.statusCode || 401);
   }
+
+
+  return next()
 }

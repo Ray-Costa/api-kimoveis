@@ -1,14 +1,14 @@
 import {User} from './users.entity';
-import {ScheduleUsersProperty} from './schedulesUsersProperties.entity';
-import {RealEstateEntity} from './realEstate.entity';
+import {Schedule} from './schedulesUsersProperties.entity';
+import {RealEstate} from './realEstate.entity';
 import {Address} from './addresses.entity';
 import {Category} from './categories.entity';
 
 export {
 
   User,
-  ScheduleUsersProperty,
-  RealEstateEntity,
+  Schedule,
+  RealEstate,
   Address,
   Category
 }

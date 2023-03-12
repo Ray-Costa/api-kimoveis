@@ -47,7 +47,7 @@ const categoryRealStation = async (): Promise<any> => {
 
   return {
     ...category,
-    realEstate: await realEstateRepo.find(),
+    realEstates: await realEstateRepo.find(),
   };
 };
 

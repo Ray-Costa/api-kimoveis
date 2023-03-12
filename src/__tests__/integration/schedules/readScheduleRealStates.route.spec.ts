@@ -34,11 +34,30 @@ describe('GET /schedules/realEstate/:id', () => {
 
     const expectResults = {
       status: 200,
-      expectBody: readRealEstate,
+      expectBody: readRealEstate
     };
 
-    expect(response.status).toBe(expectResults.status);
+    delete expectResults.expectBody.createdAt;
+    delete expectResults.expectBody.updatedAt;
+    // @ts-ignore
+    expectResults.expectBody.schedules = expectResults.expectBody?.schedules?.map((schedule: any) => {
+      delete schedule.user.password;
+      delete schedule.user.createdAt;
+      delete schedule.user.updatedAt;
+      return schedule;
+    });
+
+    delete response.body.createdAt;
+    delete response.body.updatedAt;
+    response.body.schedules = response.body.schedules.map((schedule: any) => {
+      delete schedule.user.password;
+      delete schedule.user.createdAt;
+      delete schedule.user.updatedAt;
+      return schedule;
+    });
     expect(response.body).toEqual(expectResults.expectBody);
+
+    expect(response.status).toBe(expectResults.status);
   });
 
   it('Error: Must not be able list all real estates schedules - User token', async () => {

@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
-import { RealEstateEntity } from './realEstate.entity';
-import { ScheduleUsersProperty} from './schedulesUsersProperties.entity';
+import { RealEstate } from './realEstate.entity';
+import { Schedule} from './schedulesUsersProperties.entity';
 
 @Entity('users')
 
@@ -24,13 +24,10 @@ export class User {
   email: string
 
   @Column({ default: false })
-  admin?: boolean
+  admin: boolean
 
   @Column({ length: 120 })
   password: string
-
-  @Column({ default: true })
-  active?: boolean
 
   @CreateDateColumn()
   createdAt: string
@@ -41,6 +38,6 @@ export class User {
   @DeleteDateColumn()
   deletedAt: string
 
-  @OneToMany(()=> ScheduleUsersProperty, schedule => schedule.user)
-  schedules: ScheduleUsersProperty[]
+  @OneToMany(()=> Schedule, schedule => schedule.user)
+  schedules: Schedule[]
 }

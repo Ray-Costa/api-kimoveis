@@ -1,23 +1,37 @@
 import { Repository } from 'typeorm';
-import { Address, RealEstateEntity } from '../../entities';
+import { Address, Category, RealEstate } from '../../entities';
 import { AppDataSource } from '../../data-source';
-import { returnRealEstateSchemas } from '../../schemas';
-import { ICreateRealEstate } from '../../interfaces/realEstate.interfaces';
-import { addressReturnSchema } from '../../schemas/realEstate.schemas';
+import {
+  ICreateRealEstate,
+  ICreateRealEstateSingleReturn,
+} from '../../interfaces/realEstate.interfaces';
+import { addressReturnSchema, returnRealEstateSchemas } from '../../schemas/realEstate.schemas';
 
-
-export const createRealEstateService = async (realEstateData: ICreateRealEstate): Promise<ICreateRealEstate> => {
+export const createRealEstateService = async (realEstateData: ICreateRealEstate): Promise<ICreateRealEstateSingleReturn> => {
 
   const addressRepository: Repository<Address> = AppDataSource.getRepository(Address)
-  const realEstateRepository: Repository<RealEstateEntity> = AppDataSource.getRepository(RealEstateEntity)
+  const realEstateRepository: Repository<RealEstate> = AppDataSource.getRepository(RealEstate)
+  const categoryRepository: Repository<Category> = AppDataSource.getRepository(Category)
 
   const newAddress = addressRepository.create(realEstateData.address);
   const addressSaved = await addressRepository.save(newAddress)
 
-  const realEstate = realEstateRepository.create({ ...realEstateData, address: addressSaved.id })
+  const category = await categoryRepository.findOne({ where: { id: realEstateData.categoryId } });
+
+  const realEstate = realEstateRepository.create({
+    ...realEstateData,
+    address: addressSaved.id,
+    category: realEstateData.categoryId
+  })
   await realEstateRepository.save(realEstate)
 
-  return returnRealEstateSchemas.parse({ ...realEstate, address: addressReturnSchema.parse(addressSaved) });
+  console.log(realEstate);
+
+  return returnRealEstateSchemas.parse({
+    ...realEstate,
+    address: addressReturnSchema.parse(addressSaved),
+    category: category
+  });
 }
 
 

@@ -37,6 +37,8 @@ describe('PATCH /users', () => {
   });
 
   afterAll(async () => {
+    const users: User[] = await userRepo.find();
+    await userRepo.remove(users);
     await connection.destroy();
   });
 
@@ -125,13 +127,14 @@ describe('PATCH /users', () => {
       status: 200,
     };
 
-    const { password, ...payload } = userAdmin;
+    const { password, createdAt, updatedAt, deletedAt, ...payload } = userAdmin;
 
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toEqual(expect.objectContaining(payload));
     expect(response.body).not.toEqual(
       expect.objectContaining({ password: expect.any(String) })
     );
+
   });
 
   it('Success: User must be able to self update - User token - Partial', async () => {
@@ -147,7 +150,7 @@ describe('PATCH /users', () => {
       status: 200,
     };
 
-    const { password, ...payload } = userNotAdmin;
+    const { password, createdAt, updatedAt, ...payload } = userNotAdmin;
 
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toEqual(expect.objectContaining(payload));
@@ -169,7 +172,7 @@ describe('PATCH /users', () => {
       status: 200,
     };
 
-    const { password, ...payload } = userAdmin;
+    const { password, createdAt, updatedAt, ...payload } = userAdmin;
 
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toEqual(expect.objectContaining(payload));
@@ -191,7 +194,7 @@ describe('PATCH /users', () => {
       status: 200,
     };
 
-    const { password, ...payload } = userNotAdmin;
+    const { password, createdAt, updatedAt, ...payload } = userNotAdmin;
 
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toEqual(expect.objectContaining(payload));

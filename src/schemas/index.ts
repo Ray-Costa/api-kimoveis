@@ -1,8 +1,9 @@
 import { allUsersSchema, returnUserSchema, userSchemas } from './user.schemas';
 import { createLoginSchemas } from './login.schemas';
-import { createCategoriesSchemas, returnCategoriesSchemas,allCategoriesSchema } from './categories.schemas';
-import{returnRealEstateSchemas,allRealEstateSchema} from './realEstate.schemas';
-import{returnScheduleSchemas} from './schedules.schemas';
+import { allCategoriesSchema, createCategoriesSchemas, returnCategoriesSchemas } from './categories.schemas';
+import { allRealEstateSchema, returnRealEstateSchemas } from './realEstate.schemas';
+import { returnScheduleSchemas,realEstateSchedulesSchema } from './schedules.schemas';
+import {categoryRealEstateSchema} from './categories.schemas';
 
 
 export {
@@ -15,5 +16,7 @@ export {
   allCategoriesSchema,
   returnRealEstateSchemas,
   allRealEstateSchema,
-  returnScheduleSchemas
+  returnScheduleSchemas,
+  realEstateSchedulesSchema,
+  categoryRealEstateSchema
 }

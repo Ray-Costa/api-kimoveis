@@ -17,7 +17,7 @@ export const ensureAddressRealEstateExistsMiddleware = async (request: Request, 
   })
 
   if (findAddress) {
-    throw new AppError('Address already exists.', 409)
+    throw new AppError('Address already exists', 409)
   }
 
   return next()

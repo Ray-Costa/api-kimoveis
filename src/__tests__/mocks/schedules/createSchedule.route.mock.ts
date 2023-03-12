@@ -1,39 +1,41 @@
+const now = new Date();
+const fiveMinutesAhead = new Date(now.getTime() + 5 * 60000);
 export default {
   schedulesComplete: {
-    date: '2022/03/01',
-    hour: '12:30',
+    date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate() + 1}`,
+    hour: `${now.getHours()}:${fiveMinutesAhead.getMinutes()}`
   },
   schedulesRealEstateInvalidID: {
-    date: '2022/03/01',
-    hour: '12:30',
-    realEstateId: 123456,
+    date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate() + 1}`,
+    hour: `${now.getHours()}:${fiveMinutesAhead.getMinutes()}`,
+    realEstateId: 123456
   },
   schedulesUnique: {
-    date: '2022/03/01',
-    hour: '12:30',
+    date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate() + 1}`,
+    hour: `${now.getHours()}:${fiveMinutesAhead.getMinutes()}`
   },
   schedulesSameDateDifferentRealEstate: {
-    date: '2022/03/01',
-    hour: '12:30',
+    date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate() + 1}`,
+    hour: `${now.getHours()}:${fiveMinutesAhead.getMinutes()}`
   },
   schedulesBefore8AM: {
-    date: '2022/03/01',
-    hour: '05:00',
+    date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate() + 1}`,
+    hour: '05:00'
   },
   schedulesAfter18PM: {
-    date: '2022/03/01',
-    hour: '19:00',
+    date: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate() + 1}`,
+    hour: '19:00'
   },
   schedulesInvalidDate: {
-    date: '2022/01/01',
-    hour: '12:30',
+    date: `2023-03-18`,
+    hour: `${now.getHours()}:${fiveMinutesAhead.getMinutes()}`
   },
   schedulesInvalidBody: {
     date: 12345,
     hour: [],
-    realEstateId: '12345',
+    realEstateId: '12345'
   },
   schedulesInvalidBody2: {
-    ignore_this_key: 'ignore essa chave',
-  },
+    ignore_this_key: 'ignore essa chave'
+  }
 };

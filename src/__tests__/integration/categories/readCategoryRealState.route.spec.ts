@@ -34,19 +34,32 @@ describe('GET /categories/:id/realEstate', () => {
   it('Success: Must be able to list all real states from a category', async () => {
     const response = await supertest(app).get(baseUrl);
 
+    // @ts-ignore
+    categoryRealEstate.realEstates = categoryRealEstate.realEstates?.map((realEstate: any) => {
+      delete realEstate.createdAt;
+      delete realEstate.updatedAt;
+      return realEstate;
+    })
+
     const expectResults = {
       status: 200,
       bodyEqual: expect.objectContaining(categoryRealEstate),
     };
 
-    expect(response.status).toBe(expectResults.status);
+    response.body.realEstates = response.body.realEstates.map((realEstate: any) => {
+      delete realEstate.createdAt;
+      delete realEstate.updatedAt;
+      return realEstate;
+    })
+
     expect(response.body).toEqual(expectResults.bodyEqual);
+    expect(response.status).toBe(expectResults.status);
   });
 
   it('Error: Must be not able to list all real states from a category - Invalid ID', async () => {
     const response = await supertest(app).get(readInvalidIDUrl);
 
-    expect(response.status).toBe(errorsMock.notFound.category.status);
     expect(response.body).toStrictEqual(errorsMock.notFound.category.error);
+    expect(response.status).toBe(errorsMock.notFound.category.status);
   });
 });

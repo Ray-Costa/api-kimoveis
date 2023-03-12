@@ -9,5 +9,5 @@ import { isAdmin } from '../middlewares/isAdmin.middleware';
 
 export const realEstateRoutes: Router = Router()
 
-realEstateRoutes.post('', ensureDataIsValidMiddleware(createRealEstateSchemas),isAdmin, ensureAddressRealEstateExistsMiddleware, createRealEstateController)
+realEstateRoutes.post('', ensureDataIsValidMiddleware(createRealEstateSchemas), isAdmin, ensureAddressRealEstateExistsMiddleware, createRealEstateController)
 realEstateRoutes.get('', listAllRealEstateController)

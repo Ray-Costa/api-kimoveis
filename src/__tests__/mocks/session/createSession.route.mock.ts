@@ -2,7 +2,7 @@ export default {
   userActive: {
     name: 'Fabio',
     email: 'fabio@kenzie.com.br',
-    password: '1234',
+    password: '$2a$10$td0GH2yJkDreeWqaB2nqk.rPTDVi7DCU6Mssd0VsuAXNq0eCd.EXy',
     admin: true,
   },
   userToInactive: {

@@ -3,7 +3,7 @@ import { hashSync } from 'bcryptjs';
 
 export const userSchemas = z.object({
   name: z.string().min(3).max(45),
-  email: z.string().email().min(10).max(45),
+  email: z.string().email().max(45),
   password: z.string().min(4).max(20).transform((pass) => {
     return hashSync(pass, 10)
   }),
@@ -21,4 +21,4 @@ export const returnUserSchema = userSchemas.extend({
 
 export const allUsersSchema = returnUserSchema.array()
 
-export const userUpdateSchema = userSchemas.pick({ name: true, email: true, password: true })
+export const userUpdateSchema = userSchemas.partial()

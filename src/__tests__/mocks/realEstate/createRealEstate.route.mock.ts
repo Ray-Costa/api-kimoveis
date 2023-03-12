@@ -50,7 +50,7 @@ export default {
     },
   },
   realEstateInvalidBody: {
-    value: '100000.99',
+    value: 100000.99,
     size: -8,
     address: {
       street: [],

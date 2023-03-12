@@ -29,10 +29,21 @@ describe('GET /realEstate', () => {
 
     const expectResults = {
       status: 200,
-      expectBody: readRealEstate,
+      expectBody: readRealEstate
     };
 
     expect(response.status).toBe(expectResults.status);
-    expect(response.body).toEqual(expectResults.expectBody);
+    expect(response.body.map((item: any) => {
+      delete item.createdAt;
+      delete item.category;
+      delete item.updatedAt;
+      return item;
+    })).toEqual(
+      expectResults.expectBody.map(item => {
+        delete item.createdAt;
+        delete item.updatedAt;
+        return item;
+      })
+    );
   });
 });

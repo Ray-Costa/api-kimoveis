@@ -2,6 +2,8 @@ import {createUserController,listUsersController,deleteUserController,updateUser
 import {createLoginCrontroller} from './login.controllers';
 import {createCategoryController,listCategoriesController} from './categories.controllers';
 import{createRealEstateController} from './realEstate.controllers';
+import {listCategoriesRealEstateController} from './categories.controllers';
+
 
 export {
   createUserController,
@@ -11,5 +13,7 @@ export {
   createLoginCrontroller,
   createCategoryController,
   listCategoriesController,
-  createRealEstateController
+  createRealEstateController,
+  listCategoriesRealEstateController
+
 }

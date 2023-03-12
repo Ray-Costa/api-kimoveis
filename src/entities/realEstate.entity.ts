@@ -10,12 +10,12 @@ import {
   UpdateDateColumn
 } from 'typeorm';
 import { Address } from './addresses.entity';
-import { ScheduleUsersProperty } from './schedulesUsersProperties.entity';
+import { Schedule } from './schedulesUsersProperties.entity';
 import { Category } from './categories.entity';
 
 @Entity('real_estate')
 
-export class RealEstateEntity {
+export class RealEstate {
 
   @PrimaryGeneratedColumn('increment')
   id: number
@@ -23,8 +23,8 @@ export class RealEstateEntity {
   @Column({ default: false })
   sold: boolean
 
-  @Column('decimal', { precision: 12, scale: 2 })
-  value: number
+  @Column({ type: 'decimal', precision: 12, scale: 2, default: 0 })
+  value: number | string;
 
   @Column()
   size: number
@@ -35,8 +35,8 @@ export class RealEstateEntity {
   @UpdateDateColumn()
   updatedAt: string
 
-  @OneToMany(() => ScheduleUsersProperty, schedule => schedule.user)
-  schedules: ScheduleUsersProperty[]
+  @OneToMany(() => Schedule, schedule => schedule.realEstate)
+  schedules: Schedule[]
 
   @OneToOne(() => Address, { nullable: true })
   @JoinColumn()

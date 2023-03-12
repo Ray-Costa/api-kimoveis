@@ -217,7 +217,7 @@ describe('POST /schedules', () => {
       status: 400,
       expectBody: {
         message: {
-          date: ['Expected string, received number'],
+          date: ['Required'],
           hour: ['Expected string, received array'],
           realEstateId: ['Expected number, received string'],
         },

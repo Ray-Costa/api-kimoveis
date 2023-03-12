@@ -7,9 +7,46 @@ export const createScheduleSchemas = z.object({
     }
   }, z.date()),
   hour: z.string(),
-  realEstateId: z.number(),
+  realEstateId: z.number()
 })
 
 export const returnScheduleSchemas = createScheduleSchemas.extend({
   id: z.number()
 })
+
+export const realEstateSchedulesSchema = z.object({
+  id: z.number(),
+  value: z.any(),
+  size: z.number(),
+  sold: z.boolean(),
+  address: z.object({
+    id: z.number(),
+    street: z.string(),
+    zipCode: z.string(),
+    number: z.string().optional().nullable(),
+    city: z.string(),
+    state: z.string()
+  }),
+  category: z.object({
+    id: z.number(),
+    name: z.string()
+  }).nullish(),
+  schedules: z.array(z.object({
+    id: z.number(),
+    date: z.string(),
+    hour: z.string(),
+    user: z.object({
+      id: z.number(),
+      name: z.string(),
+      email: z.string(),
+      admin: z.boolean(),
+      createdAt: z.date(),
+      updatedAt: z.date(),
+      deletedAt: z.date().optional().nullable(),
+      password: z.string()
+    }).omit({ password: true })
+  }))
+})
+
+
+

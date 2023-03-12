@@ -15,23 +15,22 @@ export const createLoginService = async (loginData: ILogin): Promise<string> => 
   const user: User | null = await userRepository.findOneBy({ email: loginData.email })
 
   if (!user) {
-    throw new AppError('Wrong email or password', 401)
+    throw new AppError('Invalid credentials', 401)
   }
 
   const passwordMatch = await compare(loginData.password, user.password)
 
-  if(!passwordMatch){
-    throw new AppError('Wrong email or password', 401)
+  if (!passwordMatch) {
+    throw new AppError('Invalid credentials', 401)
   }
 
-  if(user.active === false){
+  if (user.deletedAt) {
     throw new AppError('User already deleted', 400)
 
   }
   const token: string = jwt.sign(
     {
-
-      role: user.admin ? 'admin' : 'user'
+      admin: user.admin
     },
     process.env.SECRET_KEY!,
     {

@@ -32,7 +32,7 @@ describe('POST /login', () => {
 
     const response = await supertest(app)
       .post(baseUrl)
-      .send(createSessionRouteMock.userActive);
+      .send({...createSessionRouteMock.userActive, password: '1234'});
 
     const expectResults = {
       status: 200,

@@ -17,11 +17,10 @@ export const ensureNameCategoryExistsMiddleware = async (request: Request, respo
   })
 
   if (findCategory) {
-    throw new AppError('Category already exists.', 409)
+    throw new AppError('Category already exists', 409)
   }
 
   return next()
-
 }
 
 
